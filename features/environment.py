@@ -8,6 +8,9 @@ def before_all(context):     #Antes de tudo
     #Maximizar a janela do navegador
     context.driver.maximize_window()
 
+    # define uma espera para todos os elementos do script
+    context.driver.implicitly_wait(30)
+
     print('Passo A - Antes de tudo')
 
 # Fim
@@ -17,3 +20,7 @@ def after_all(context):    #Depois de tud
     context.driver.quit()
 
     print('Passo Z - Depois de tudo')
+
+# Bloco executado ao final de cada step
+def after_step(context, step):
+    print()
