@@ -15,12 +15,27 @@ Feature: Compra de passagem Aerea
     Then sou direcionado para a pagina de confirmacao
 
 
-  Scenario: De Sao Paulo a Roma Compacto
+  Scenario: De Boston a Berlin Compacto
     Given  que acesso o site Blazedemo
-    When seleciono de "São Paolo" para "Rome"
+    When seleciono de "Boston" para "Berlin"
     Then sou direcionado para a pagina de selecao de voos
     When seleciono o primeiro voo
     Then sou direcionado para a pagina de pagamento
     When preencho os dados para o pagamento
     And clico no botao Purchase Flight
     Then sou direcionado para a pagina de confirmacao
+
+  Scenario Outline: De origem a destino
+    Given  que acesso o portal Blazedemo
+    When seleciono de "<origem>" para "<destino>"
+    Then sou direcionado para a pagina de selecao de voos
+    When seleciono o primeiro voo
+    Then sou direcionado para a pagina de pagamento
+    When preencho os dados para o pagamento
+    And clico no botao Purchase Flight
+    Then sou direcionado para a pagina de confirmacao
+
+    Examples:
+      | origem       | destino      |
+      | Philadelphia | Buenos Aires |
+      | Mexico City  | Cairo        |

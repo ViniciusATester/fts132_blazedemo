@@ -17,6 +17,7 @@ def before_feature(context, feature):
 
 
 @given(u'que acesso o site Blazedemo')
+@given(u'que acesso o portal Blazedemo')
 def step_impl(context):
     context.driver.get('https://www.blazedemo.com')
     print('Passo 1 - Acessou o site Blazedemo')
