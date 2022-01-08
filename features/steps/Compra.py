@@ -58,15 +58,19 @@ def step_impl(context):
     context.driver.find_element(By.CSS_SELECTOR, 'input.btn.btn-primary').click()
     print('Passo 4 - Clico no botao Find Flights')
 ''''''
-@then(u'sou direcionado para a pagina de selecao de voos')
-def step_impl(context):
+@then(u'sou direcionado para a pagina de selecao de voos de "{origem}" para "{destino}"')
+def step_impl(context, origem, destino):
+    print()
     # 3 principais motivos para um script de atumação não funcionar
     # - seletores e identificadores
     # - sincronismo
     # - programação exótica
 
-    # assert context.driver.find_element(By.TAG_NAME, 'h3').text() == 'Flights from São Paolo to Rome: '
-   # assert context.driver.find_element(By.XPATH, '/html/body/div[2]/h3').text() == 'Flights from São Paolo to Rome:'
+  #  assert context.driver.find_element(By.TAG_NAME, 'h3').text() == 'Flights from São Paolo to Rome: '
+    re = f'Flights from {origem} to {destino}:'
+    print('texto é ' + context.driver.find_element(By.XPATH, '/html[1]/body[1]/div[2]/h3[1]').text)
+    assert context.driver.find_element(By.XPATH, '/html[1]/body[1]/div[2]/h3[1]').text == re
+
     print('Passo 5 - Direcionado para a pagina de selecao de voos')
 
 @when(u'seleciono o primeiro voo')
@@ -76,7 +80,8 @@ def step_impl(context):
 
 @then(u'sou direcionado para a pagina de pagamento')
 def step_impl(context):
-   # assert context.driver.find_element(By.XPATH, '/html/body/div[2]/p[6]').text() == 'Please submit the form below to purchase the flight.'
+    re = 'Please submit the form below to purchase the flight.'
+    assert context.driver.find_element(By.XPATH, '/html/body/div[2]/p[6]').text == re
     print('Passo 7 - Sou direcionado para a pagina de pagamento')
 
 @when(u'preencho os dados para o pagamento')
@@ -91,7 +96,7 @@ def step_impl(context):
 
 @then(u'sou direcionado para a pagina de confirmacao')
 def step_impl(context):
-   # assert context.driver.find_element(By.TAG_NAME, 'h1').text() == 'Thank you for your purchase today!'
+    assert context.driver.find_element(By.TAG_NAME, 'h1').text == 'Thank you for your purchase today!'
     print('Passo 10 - Sou direcionado para a pagina de confirmacao ')
 
 @when(u'seleciono de "{origem}" para "{destino}"')
